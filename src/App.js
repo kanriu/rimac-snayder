@@ -1,25 +1,15 @@
-import logo from "./logo.svg";
-import "./App.css";
+import React from "react";
+import { UiProvider } from "./context/UiContext";
+import { RouterPage } from "./router/RouterPage";
+import GlobalStyle from "./assets/theme/globalStyles";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UiProvider>
+      <GlobalStyle />
+      <RouterPage />
+    </UiProvider>
   );
-}
+};
 
 export default App;

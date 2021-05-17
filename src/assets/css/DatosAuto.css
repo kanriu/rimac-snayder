@@ -1,0 +1,55 @@
+.icon-left {
+  font-size: 15px;
+}
+
+.label {
+  margin-left: 2%;
+  font-size: smaller;
+}
+
+.label-saludo {
+  margin-top: 10%;
+  font-size: xx-large;
+}
+
+.label-saludo label {
+  color: red;
+}
+
+.label-completar {
+  font-size: larger;
+  font-weight: 500;
+}
+
+.label-numero {
+  font-size: small;
+  font-weight: 100;
+}
+
+.btn-left {
+  border-right: none;
+  padding-top: 15px;
+  padding-bottom: 35px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.btn-right {
+  border-left: none;
+  padding-top: 15px;
+  padding-bottom: 35px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.input-number {
+  border-right: none;
+  border-left: none;
+  padding-top: 8px;
+  padding-bottom: 4px;
+}
+
+.label-ayuda {
+  font-size: medium;
+  font-weight: bold;
+}

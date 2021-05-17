@@ -1,0 +1,21 @@
+.content {
+  background-color: white;
+  border-bottom-color: #e4e8f7;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
+
+.header-left {
+  align-content: stretch;
+  overflow: hidden;
+  object-fit: cover;
+  width: 50%;
+}
+
+.header-right {
+  font-size: small;
+}
+
+.header-right a {
+  font-size: medium;
+}

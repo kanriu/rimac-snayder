@@ -1,0 +1,87 @@
+.label-saludo {
+  margin-top: 10%;
+  font-size: xx-large;
+}
+
+.label-completar {
+  font-size: larger;
+  font-weight: 500;
+}
+
+.card-car {
+  border-color: #f0f2fa;
+  border-radius: 12px;
+  border-style: solid;
+  border-width: 3px;
+  margin-top: 5%;
+  margin-bottom: 8%;
+}
+
+.img-empleado {
+  width: 80%;
+}
+
+.label-placa {
+  color: #a3abcc;
+  font-size: small;
+}
+
+.label-marca {
+  font-size: x-large;
+}
+
+.img-vehicular {
+  width: 90%;
+}
+.label-number-mensual {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.label-text-mensual {
+  font-size: small;
+  color: #676f8f;
+}
+
+.check-precio {
+  color: #43b748;
+  font-size: small;
+}
+
+.label-precio {
+  font-size: large;
+  margin-top: 3%;
+  margin-bottom: 5%;
+}
+
+.label-check {
+  font-size: medium;
+  color: #676f8f;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  margin-right: 10%;
+}
+
+.submit-arma-plan {
+  font-size: small;
+  background: #ef3340;
+  border-radius: 8px;
+  color: white;
+  padding-top: 1rem;
+  padding-bottom: 2.2rem;
+  margin-top: 10%;
+}
+
+.submit-arma-plan:hover {
+  background-color: #c6101c;
+  color: white;
+}
+
+.tabs-head {
+  background-color: white;
+  color: black;
+}
+
+.tab-column {
+  font-size: xx-large;
+}
