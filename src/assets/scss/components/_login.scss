@@ -9,7 +9,7 @@
   background-size: 100% 100%;
 }
 
-@media screen and (max-width: 401px) {
+@media screen and (max-width: 451px) {
   .img-responsive {
     align-content: stretch;
     overflow: hidden;
@@ -64,12 +64,18 @@
   top: 10px;
   z-index: 10;
   color: $link;
+  font-size: 1rem;
 }
 
 .header-link {
   color: $link;
+  font-size: 1rem;
 }
 
 .header-text {
   color: $grey;
+}
+
+.div-title {
+  color: $grey1;
 }

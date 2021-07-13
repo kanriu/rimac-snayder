@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect, useMemo } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { Col, Row } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
@@ -65,14 +65,11 @@ const Login = () => {
 
   useEffect(() => {
     dispatch(startInitial());
-  }, []);
+  }, [dispatch]);
 
-  // useEffect(() => {
-  //   console.log(mql);
-  // }, [mql]);
   const [headerMovil, setHeaderMovil] = useState(false);
 
-  const mql = window.matchMedia("(min-width:401px)");
+  const mql = window.matchMedia("(min-width:451px)");
 
   const applyMatchMedia = (mql) => {
     mql.matches ? setHeaderMovil(true) : setHeaderMovil(false);
@@ -134,7 +131,7 @@ const Login = () => {
 
           <Row className="title" justify="center">
             <Col>
-              <div>Déjanos tus datos</div>
+              <div className="div-title">Déjanos tus datos</div>
             </Col>
           </Row>
           <Row className="body" justify="center">
@@ -245,11 +242,11 @@ const Login = () => {
                         }
                         label={
                           <div className="terminos">
-                            Acepto la{" "}
+                            Acepto la&nbsp;
                             <a href="#">
                               Política de Protección de Datos Personales
-                            </a>{" "}
-                            y los <a href="#">Términos y Condiciones</a>
+                            </a>
+                            &nbsp;y los <a href="#">Términos y Condiciones</a>
                           </div>
                         }
                       />

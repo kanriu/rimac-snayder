@@ -40,7 +40,7 @@ const Bienvenida = () => {
             </Col>
           </Row>
           <Row className="mt-2">
-            <Col>
+            <Col xs={24}>
               <Button
                 variant="contained"
                 color="primary"

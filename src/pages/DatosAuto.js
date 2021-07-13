@@ -103,7 +103,7 @@ const DatosAuto = () => {
             </Col>
           </Row>
           <Row justify="space-between">
-            <Col xl={14} sm={16}>
+            <Col xl={14} sm={16} xs={24}>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <Row className="mt-2 mb-1">
                   <Col xl={24} lg={24} sm={24} xs={24}>
@@ -219,7 +219,7 @@ const DatosAuto = () => {
                   style={{ marginTop: "10%", marginBottom: "5%" }}
                   justify="space-between"
                 >
-                  <Col>
+                  <Col md={12} xs={24}>
                     <Row>
                       <Col>
                         <label className="label-completar">
@@ -237,38 +237,44 @@ const DatosAuto = () => {
                       </Col>
                     </Row>
                   </Col>
-                  <Col>
-                    <ButtonAntd
-                      className="btn-left"
-                      size="large"
-                      onClick={() => plusOrMinus("minus")}
-                    >
-                      <MinusOutlined />
-                    </ButtonAntd>
+                  <Col md={12} xs={24}>
+                    <Row justify="center">
+                      <Col>
+                        <ButtonAntd
+                          className="btn-left"
+                          size="large"
+                          onClick={() => plusOrMinus("minus")}
+                        >
+                          <MinusOutlined />
+                        </ButtonAntd>
 
-                    <InputNumber
-                      className="input-number"
-                      formatter={(value) =>
-                        `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-                      }
-                      parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
-                      min={12500}
-                      max={16500}
-                      size="large"
-                      value={auto.monto}
-                      onChange={(value) => setAuto({ ...auto, monto: value })}
-                    />
-                    <ButtonAntd
-                      className="btn-right"
-                      size="large"
-                      onClick={() => plusOrMinus("plus")}
-                    >
-                      <PlusOutlined />
-                    </ButtonAntd>
+                        <InputNumber
+                          className="input-number"
+                          formatter={(value) =>
+                            `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                          }
+                          parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
+                          min={12500}
+                          max={16500}
+                          size="large"
+                          value={auto.monto}
+                          onChange={(value) =>
+                            setAuto({ ...auto, monto: value })
+                          }
+                        />
+                        <ButtonAntd
+                          className="btn-right"
+                          size="large"
+                          onClick={() => plusOrMinus("plus")}
+                        >
+                          <PlusOutlined />
+                        </ButtonAntd>
+                      </Col>
+                    </Row>
                   </Col>
                 </Row>
-                <Row>
-                  <Col>
+                <Row className="mb-2">
+                  <Col xs={24}>
                     <Button
                       variant="contained"
                       color="primary"
@@ -284,15 +290,15 @@ const DatosAuto = () => {
                 </Row>
               </form>
             </Col>
-            <Col xl={8} sm={6}>
-              <Row>
+            <Col xl={8} sm={6} xs={24}>
+              <Row justify="center">
                 <Col>
                   <label className="label-ayuda">AYUDA</label>
                 </Col>
               </Row>
               <Divider />
-              <Row>
-                <Col xl={14} sm={14}>
+              <Row justify="center">
+                <Col xl={14} sm={14} xs={19}>
                   <Row>
                     <Col>
                       <label className="label-completar">
@@ -302,11 +308,11 @@ const DatosAuto = () => {
                   </Row>
                   <Row>
                     <Col>
-                      <a>CLIC AQUÍ</a>
+                      <a href="#">CLIC AQUÍ</a>
                     </Col>
                   </Row>
                 </Col>
-                <Col xl={10} sm={10}>
+                <Col xl={10} sm={10} xs={5}>
                   <img src={car} alt="car" />
                 </Col>
               </Row>

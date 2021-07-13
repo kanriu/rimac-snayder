@@ -19,12 +19,12 @@
 
 .label-completar {
   font-size: larger;
-  font-weight: 500;
 }
 
 .label-numero {
   font-size: small;
   font-weight: 100;
+  color: $grey;
 }
 
 .btn-left {
@@ -53,4 +53,33 @@
 .label-ayuda {
   font-size: medium;
   font-weight: bold;
+}
+
+@media screen and (max-width: 451px) {
+  .label-completar {
+    font-size: 1.5rem;
+  }
+  .label-numero {
+    font-size: large;
+  }
+
+  .btn-left {
+    width: 20%;
+  }
+
+  .input-number {
+    width: 60%;
+  }
+
+  .btn-right {
+    width: 20%;
+  }
+
+  .ant-input-number-input {
+    text-align: center;
+  }
+
+  .label {
+    font-size: larger;
+  }
 }

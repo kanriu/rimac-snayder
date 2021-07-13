@@ -73,7 +73,7 @@ const ArmaPlan = () => {
     atropello: true,
   });
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (newValue) => {
     setValue(newValue);
   };
   const customExpandIcon = (props) => {
@@ -227,7 +227,7 @@ const ArmaPlan = () => {
                 </Col>
               </Row>
               <Row justify="space-between">
-                <Col xl={13} lg={14} sm={14}>
+                <Col xl={13} lg={14} sm={14} xs={24}>
                   <PerfectScrollbar style={{ height: "400px" }}>
                     <Row>
                       <Col xl={24} lg={24} sm={24} xs={24}>
@@ -241,7 +241,7 @@ const ArmaPlan = () => {
                                 {auto.marca} {auto.age}
                               </div>
                               <div>
-                                <a>EDITAR</a>
+                                <a href="#">EDITAR</a>
                               </div>
                             </Col>
                             <Col>
@@ -377,7 +377,7 @@ const ArmaPlan = () => {
                     </Row>
                   </PerfectScrollbar>
                 </Col>
-                <Col xl={8} lg={8} sm={8}>
+                <Col xl={8} lg={8} sm={8} xs={24}>
                   <Row align="middle" justify="space-between">
                     <Col>
                       <div className="label-number-mensual">
@@ -394,20 +394,35 @@ const ArmaPlan = () => {
                     </Col>
                   </Row>
                   <Divider />
-                  <Row>
-                    <div className="label-precio">El precio incluye:</div>
-                    <div className="label-check">
-                      <CheckOutlined className="check-precio" /> Llanta de
-                      respuesto
-                    </div>
-                    <div className="label-check">
-                      <CheckOutlined className="check-precio" /> Analisis de
-                      motor&nbsp;&nbsp;
-                    </div>
-                    <div className="label-check">
-                      <CheckOutlined className="check-precio" /> Aros gratis
-                    </div>
+                  <Row justify="center">
+                    <Col>
+                      <div className="label-precio">El precio incluye:</div>
+                    </Col>
                   </Row>
+                  <Row justify="center">
+                    <Col xs={11}>
+                      <div className="label-check">
+                        <CheckOutlined className="check-precio" /> Llanta de
+                        respuesto
+                      </div>
+                    </Col>
+                  </Row>
+                  <Row justify="center">
+                    <Col xs={11}>
+                      <div className="label-check">
+                        <CheckOutlined className="check-precio" /> Analisis de
+                        motor&nbsp;&nbsp;
+                      </div>
+                    </Col>
+                  </Row>
+                  <Row justify="center">
+                    <Col xs={11}>
+                      <div className="label-check">
+                        <CheckOutlined className="check-precio" /> Aros gratis
+                      </div>
+                    </Col>
+                  </Row>
+
                   <Row className="mt-2">
                     <Col xl={24} lg={24} sm={24} xs={24}>
                       <Button
