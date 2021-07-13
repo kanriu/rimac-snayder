@@ -1,25 +1,31 @@
 import React, { useState } from "react";
-import { Button, Card, Col, Divider, Row, Collapse, Space } from "antd";
+import {
+  Button as ButtonAntd,
+  Card,
+  Col,
+  Divider,
+  Row,
+  Collapse,
+  Space,
+} from "antd";
 import { useHistory } from "react-router-dom";
 import Volver from "../components/Volver";
 import { useDispatch, useSelector } from "react-redux";
 import empleado from "../assets/images/empleado_rimac.PNG";
 import vehicular from "../assets/images/veh_flex_rimac.PNG";
-import "../assets/css/ArmaPlan.css";
-import {
-  CheckOutlined,
-  CaretUpOutlined,
-  CaretDownOutlined,
-  PlusOutlined,
-  MinusOutlined,
-} from "@ant-design/icons";
+import { CheckOutlined, PlusOutlined, MinusOutlined } from "@ant-design/icons";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
+import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import ExpandMore from "@material-ui/icons/ExpandMore";
+import ExpandLess from "@material-ui/icons/ExpandLess";
+import IconButton from "@material-ui/core/IconButton";
 import "react-perfect-scrollbar/dist/css/styles.css";
+import { setFinal } from "../redux/actions/global";
 
 const { Panel } = Collapse;
 function TabPanel(props) {
@@ -51,14 +57,14 @@ function a11yProps(index) {
 const ArmaPlan = () => {
   let dispatch = useDispatch();
   let history = useHistory();
-  const auto = useSelector((state) => state.Global.Auto);
-  const user = useSelector((state) => state.Auth.User);
+  const auto = useSelector((state) => state.global.auto);
+  const user = useSelector((state) => state.auth.user);
   const [value, setValue] = React.useState(0);
   const [coberturas, setCoberturas] = useState({
     robo: "",
     choque: "",
     atropello: "",
-    monto: 35,
+    monto: 20,
   });
 
   const [estado, setEstado] = useState({
@@ -73,58 +79,44 @@ const ArmaPlan = () => {
   const customExpandIcon = (props) => {
     if (props.isActive) {
       return (
-        <CaretDownOutlined style={{ color: "#EF3340", fontSize: "20px" }} />
+        <IconButton color="default" className="icon-caret">
+          <ExpandMore />
+        </IconButton>
       );
     } else {
-      return <CaretUpOutlined style={{ color: "#EF3340", fontSize: "20px" }} />;
+      return (
+        <IconButton color="default" className="icon-caret">
+          <ExpandLess />
+        </IconButton>
+      );
     }
   };
   const ItemPlusMinus = ({ condition, name }) => {
     if (condition === "plus") {
       return (
-        <>
-          <Button
+        <div onClick={() => agregarQuitar("agregar", name)}>
+          <ButtonAntd
             type="default"
             shape="circle"
             icon={
               <PlusOutlined style={{ color: "#6F7DFF", fontSize: "16px" }} />
             }
-            onClick={() => agregarQuitar("agregar", name)}
           />
-          <label
-            style={{
-              color: "#6F7DFF",
-              fontSize: "x-small",
-              fontWeight: "bold",
-              marginLeft: "5px",
-            }}
-          >
-            AGREGAR
-          </label>
-        </>
+          <label className="label-icon ml-1 pointer">AGREGAR</label>
+        </div>
       );
     } else {
       return (
-        <>
-          <Button
+        <div onClick={() => agregarQuitar("quitar", name)}>
+          <ButtonAntd
             type="default"
             shape="circle"
             icon={
               <MinusOutlined style={{ color: "#6F7DFF", fontSize: "16px" }} />
             }
-            onClick={() => agregarQuitar("quitar", name)}
           />
-          <label
-            style={{
-              color: "#6F7DFF",
-              fontSize: "x-small",
-              fontWeight: "bold",
-              marginLeft: "5px",
-            }}
-          >
-            QUITAR
-          </label>
-        </>
+          <label className="label-icon ml-1 pointer">QUITAR</label>
+        </div>
       );
     }
   };
@@ -212,7 +204,7 @@ const ArmaPlan = () => {
   };
 
   const nextPage = () => {
-    dispatch({ type: "FINAL", payload: true });
+    dispatch(setFinal());
     history.push("/bienvenida");
   };
   return (
@@ -305,58 +297,73 @@ const ArmaPlan = () => {
                               className="label-precio"
                               header="Llanta robada"
                               key="1"
-                              extra={
-                                estado.robo ? (
-                                  <ItemPlusMinus condition="plus" name="robo" />
-                                ) : (
-                                  <ItemPlusMinus
-                                    condition="minus"
-                                    name="robo"
-                                  />
-                                )
-                              }
                             >
-                              {coberturas.robo}
+                              <Row>
+                                <Col>
+                                  {estado.robo ? (
+                                    <ItemPlusMinus
+                                      condition="plus"
+                                      name="robo"
+                                    />
+                                  ) : (
+                                    <ItemPlusMinus
+                                      condition="minus"
+                                      name="robo"
+                                    />
+                                  )}
+                                </Col>
+                              </Row>
+                              <Row className="mt-1">
+                                <Col>{coberturas.robo}</Col>
+                              </Row>
                             </Panel>
                             <Panel
                               className="label-precio"
                               header="Choque y/o pasarte la luz roja"
                               key="2"
-                              extra={
-                                estado.choque ? (
-                                  <ItemPlusMinus
-                                    condition="plus"
-                                    name="choque"
-                                  />
-                                ) : (
-                                  <ItemPlusMinus
-                                    condition="minus"
-                                    name="choque"
-                                  />
-                                )
-                              }
                             >
-                              {coberturas.choque}
+                              <Row>
+                                <Col>
+                                  {estado.choque ? (
+                                    <ItemPlusMinus
+                                      condition="plus"
+                                      name="choque"
+                                    />
+                                  ) : (
+                                    <ItemPlusMinus
+                                      condition="minus"
+                                      name="choque"
+                                    />
+                                  )}
+                                </Col>
+                              </Row>
+                              <Row className="mt-1">
+                                <Col> {coberturas.choque}</Col>
+                              </Row>
                             </Panel>
                             <Panel
                               className="label-precio"
                               header="Atropello en la vía Evitamiento"
                               key="3"
-                              extra={
-                                estado.atropello ? (
-                                  <ItemPlusMinus
-                                    condition="plus"
-                                    name="atropello"
-                                  />
-                                ) : (
-                                  <ItemPlusMinus
-                                    condition="minus"
-                                    name="atropello"
-                                  />
-                                )
-                              }
                             >
-                              {coberturas.atropello}
+                              <Row>
+                                <Col>
+                                  {estado.atropello ? (
+                                    <ItemPlusMinus
+                                      condition="plus"
+                                      name="atropello"
+                                    />
+                                  ) : (
+                                    <ItemPlusMinus
+                                      condition="minus"
+                                      name="atropello"
+                                    />
+                                  )}
+                                </Col>
+                              </Row>
+                              <Row className="mt-1">
+                                <Col> {coberturas.atropello}</Col>
+                              </Row>
                             </Panel>
                           </Collapse>
                         </TabPanel>
@@ -401,14 +408,17 @@ const ArmaPlan = () => {
                       <CheckOutlined className="check-precio" /> Aros gratis
                     </div>
                   </Row>
-                  <Row>
+                  <Row className="mt-2">
                     <Col xl={24} lg={24} sm={24} xs={24}>
                       <Button
-                        className="submit-arma-plan"
-                        block
+                        variant="contained"
+                        color="primary"
+                        className="btn-primary"
+                        size="large"
+                        fullWidth
                         onClick={nextPage}
                       >
-                        LO QUIERO
+                        Lo quiero
                       </Button>
                     </Col>
                   </Row>

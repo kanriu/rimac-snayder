@@ -22,7 +22,7 @@
 }
 
 .label-placa {
-  color: #a3abcc;
+  color: $secondary;
   font-size: small;
 }
 
@@ -40,11 +40,11 @@
 
 .label-text-mensual {
   font-size: small;
-  color: #676f8f;
+  color: $secondary;
 }
 
 .check-precio {
-  color: #43b748;
+  color: $success;
   font-size: small;
 }
 
@@ -56,7 +56,7 @@
 
 .label-check {
   font-size: medium;
-  color: #676f8f;
+  color: $secondary;
   margin-top: 2%;
   margin-bottom: 2%;
   margin-right: 10%;
@@ -84,4 +84,14 @@
 
 .tab-column {
   font-size: xx-large;
+}
+
+.icon-caret {
+  color: $primary !important;
+}
+
+.label-icon {
+  color: $info;
+  font-size: x-small;
+  font-weight: bold;
 }

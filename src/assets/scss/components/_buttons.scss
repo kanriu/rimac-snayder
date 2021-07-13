@@ -1,0 +1,14 @@
+.btn-primary {
+  color: white !important;
+  background-color: $primary !important;
+  // padding-left: 1px !important;
+  // padding-right: 1px !important;
+
+  &:disabled {
+    background-color: lighten($color: $primary, $amount: 10) !important;
+  }
+
+  &:hover {
+    background-color: darken($color: $primary, $amount: 10) !important;
+  }
+}

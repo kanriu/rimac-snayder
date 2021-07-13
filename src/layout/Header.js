@@ -1,6 +1,5 @@
 import React from "react";
 import { Layout, Row, Col } from "antd";
-import "../assets/css/Header.css";
 import logo from "../assets/images/logo_rimac.png";
 import { PhoneTwoTone } from "@ant-design/icons";
 

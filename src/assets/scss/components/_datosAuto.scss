@@ -3,8 +3,9 @@
 }
 
 .label {
-  margin-left: 2%;
+  margin-left: 20%;
   font-size: smaller;
+  color: $secondary;
 }
 
 .label-saludo {
@@ -13,7 +14,7 @@
 }
 
 .label-saludo label {
-  color: red;
+  color: $primary;
 }
 
 .label-completar {

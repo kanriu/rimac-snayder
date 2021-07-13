@@ -3,21 +3,22 @@ import { Button, Col, Row } from "antd";
 import { LeftOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { startSignOut } from "../redux/actions/auth";
 
 const Volver = ({ enlace, inicio }) => {
   let history = useHistory();
   let dispatch = useDispatch();
   const volver = () => {
     if (inicio) {
-      dispatch({ type: "SIGNOUT", payload: null });
+      dispatch(startSignOut());
     } else {
       dispatch({ type: "SIDEBAR", payload: 0 });
       history.push(enlace);
     }
   };
   return (
-    <Row>
-      <Col xl={24} lg={24} sm={24} xs={24}>
+    <Row align="middle">
+      <Col>
         <Button
           shape="circle"
           icon={<LeftOutlined style={{ fontSize: "12px" }} />}
@@ -25,6 +26,8 @@ const Volver = ({ enlace, inicio }) => {
           danger
           onClick={volver}
         />
+      </Col>
+      <Col>
         <label className="label">VOLVER</label>
       </Col>
     </Row>

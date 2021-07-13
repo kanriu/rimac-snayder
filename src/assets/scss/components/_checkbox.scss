@@ -1,0 +1,6 @@
+.check-success {
+  color: $success !important;
+  &:checked {
+    background-color: darken($color: $success, $amount: 10) !important;
+  }
+}

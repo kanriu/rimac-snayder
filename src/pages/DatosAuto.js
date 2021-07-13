@@ -1,51 +1,67 @@
 import React, { useState } from "react";
-import { Button, Card, Col, Row, Radio, Divider, InputNumber } from "antd";
-import { RightOutlined, MinusOutlined, PlusOutlined } from "@ant-design/icons";
-import "../assets/css/DatosAuto.css";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import { makeStyles } from "@material-ui/core/styles";
-import FormControl from "@material-ui/core/FormControl";
+import {
+  Button as ButtonAntd,
+  Card,
+  Col,
+  Row,
+  Divider,
+  InputNumber,
+} from "antd";
+import { MinusOutlined, PlusOutlined } from "@ant-design/icons";
+import TextField from "@material-ui/core/TextField";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Radio from "@material-ui/core/Radio";
+import Button from "@material-ui/core/Button";
 import MenuItem from "@material-ui/core/MenuItem";
+import ChevronRight from "@material-ui/icons/ChevronRight";
 import car from "../assets/images/car_rimac.PNG";
 import { useHistory } from "react-router-dom";
 import Volver from "../components/Volver";
 import { useDispatch, useSelector } from "react-redux";
-
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-}));
+import { useForm, Controller } from "react-hook-form";
+import { setSidebar, setAutoGlobal } from "../redux/actions/global";
 
 const DatosAuto = () => {
-  let dispatch = useDispatch();
-  let history = useHistory();
-  const classes = useStyles();
-  const user = useSelector((state) => state.Auth.User);
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      year: "",
+      marca: "",
+    },
+  });
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const user = useSelector((state) => state.auth.user);
   const [auto, setAuto] = useState({
-    age: "",
-    marca: "",
     monto: 12500,
   });
-  const handleChange = (event) => {
-    const name = event.target.name;
-    setAuto({
-      ...auto,
-      [name]: event.target.value,
-    });
-  };
-
   const [value, setValue] = React.useState(1);
 
-  const onChange = (e) => {
-    console.log("radio checked", e.target.value);
-    setValue(e.target.value);
+  const handleChange = ({ target }) => {
+    setValue(parseInt(target.value));
   };
-  const nextPage = () => {
-    dispatch({ type: "SIDEBAR", payload: 1 });
-    dispatch({ type: "AUTO", payload: auto });
+
+  //const [value, setValue] = React.useState(1);
+
+  // const onChange = (e) => {
+  //   console.log("radio checked", e.target.value);
+  //   setValue(e.target.value);
+  // };
+
+  const onSubmit = (data) => {
+    const dataAuto = {
+      ...auto,
+      year: data.year,
+      marca: data.marca,
+    };
+
+    dispatch(setAutoGlobal(dataAuto));
+    dispatch(setSidebar(1));
     history.push("/arma-plan");
   };
 
@@ -68,97 +84,136 @@ const DatosAuto = () => {
   };
 
   return (
-    <>
-      <Row justify="center">
-        <Col xl={15} sm={24} xs={24}>
-          <Card bordered={false}>
-            <Volver enlace="" inicio={true} />
-            <Row>
-              <Col>
-                <div className="label-saludo">
-                  ¡Hola, <label>{user.name}!</label>
-                </div>
-              </Col>
-            </Row>
-            <Row>
-              <Col>
-                <label className="label-completar">
-                  Completa los datos de tu auto
-                </label>
-              </Col>
-            </Row>
-            <Row justify="space-between">
-              <Col xl={14} sm={16}>
-                <Row style={{ marginTop: "6%" }}>
+    <Row justify="center">
+      <Col xl={15} sm={24} xs={24}>
+        <Card bordered={false}>
+          <Volver enlace="" inicio={true} />
+          <Row>
+            <Col>
+              <div className="label-saludo">
+                ¡Hola, <label>{user.name}!</label>
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <label className="label-completar">
+                Completa los datos de tu auto
+              </label>
+            </Col>
+          </Row>
+          <Row justify="space-between">
+            <Col xl={14} sm={16}>
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <Row className="mt-2 mb-1">
                   <Col xl={24} lg={24} sm={24} xs={24}>
-                    <FormControl
-                      variant="filled"
-                      className={classes.formControl}
-                      style={{ width: "100%" }}
-                    >
-                      <InputLabel id="demo-simple-select-filled-label">
-                        Año
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-filled-label"
-                        id="demo-simple-select-filled"
-                        value={auto.age}
-                        onChange={handleChange}
-                        name="age"
-                      >
-                        <MenuItem value="">
-                          <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={2021}>2021</MenuItem>
-                        <MenuItem value={2020}>2020</MenuItem>
-                        <MenuItem value={2019}>2019</MenuItem>
-                      </Select>
-                    </FormControl>
+                    <Controller
+                      control={control}
+                      name="year"
+                      {...register("year", { required: true })}
+                      render={({ field }) => (
+                        <TextField
+                          {...field}
+                          error={errors.year ? true : false}
+                          helperText={
+                            errors.year
+                              ? "Por favor, seleccione el año del carro"
+                              : ""
+                          }
+                          select
+                          variant="outlined"
+                          value={errors.year}
+                          fullWidth
+                          label="Año"
+                        >
+                          <MenuItem value="">
+                            <em>None</em>
+                          </MenuItem>
+                          <MenuItem value={2021}>2021</MenuItem>
+                          <MenuItem value={2020}>2020</MenuItem>
+                          <MenuItem value={2019}>2019</MenuItem>
+                        </TextField>
+                      )}
+                    />
                   </Col>
                 </Row>
-                <Row>
+                <Row className="mt-1 mb-1">
                   <Col xl={24} lg={24} sm={24} xs={24}>
-                    <FormControl
-                      variant="filled"
-                      className={classes.formControl}
-                      style={{ width: "100%" }}
-                    >
-                      <InputLabel id="demo-simple-select-filled-label">
-                        Marca
-                      </InputLabel>
-                      <Select
-                        labelId="demo-simple-select-filled-label"
-                        id="demo-simple-select-filled"
-                        value={auto.marca}
-                        onChange={handleChange}
-                        name="marca"
-                      >
-                        <MenuItem value="">
-                          <em>None</em>
-                        </MenuItem>
-                        <MenuItem value="BMW">BMW</MenuItem>
-                        <MenuItem value="Audi">Audi</MenuItem>
-                        <MenuItem value="Ford">Ford</MenuItem>
-                      </Select>
-                    </FormControl>
+                    <Controller
+                      control={control}
+                      name="marca"
+                      {...register("marca", {
+                        required: true,
+                      })}
+                      render={({ field }) => (
+                        <TextField
+                          {...field}
+                          error={errors.marca ? true : false}
+                          helperText={
+                            errors.marca
+                              ? "Por favor, seleccione la marca del carro"
+                              : ""
+                          }
+                          select
+                          variant="outlined"
+                          value={errors.marca}
+                          fullWidth
+                          label="Marca"
+                        >
+                          <MenuItem value="">
+                            <em>None</em>
+                          </MenuItem>
+                          <MenuItem value="BMW">BMW</MenuItem>
+                          <MenuItem value="Audi">Audi</MenuItem>
+                          <MenuItem value="Ford">Ford</MenuItem>
+                        </TextField>
+                      )}
+                    />
                   </Col>
                 </Row>
-                <Row
-                  justify="space-around"
-                  style={{ marginTop: "7%", marginBottom: "10%" }}
-                >
+                <Row justify="space-around" align="middle" className="mt-2">
                   <Col>
                     <label className="label-completar">
                       ¿Tu auto es a gas?
                     </label>
                   </Col>
                   <Col>
-                    <Radio.Group onChange={onChange} value={value}>
-                      <Radio value={1}>Sí</Radio>
-                      <Radio value={2}>No</Radio>
-                    </Radio.Group>
+                    <RadioGroup
+                      aria-label="gender"
+                      name="gender1"
+                      value={value}
+                      onChange={handleChange}
+                    >
+                      <Row align="middle">
+                        <Col>
+                          <FormControlLabel
+                            value={1}
+                            control={
+                              <Radio
+                                color="default"
+                                className="radio-success"
+                              />
+                            }
+                            label="Sí"
+                          />
+                        </Col>
+                        <Col>
+                          <FormControlLabel
+                            value={0}
+                            control={
+                              <Radio
+                                color="default"
+                                className="radio-success"
+                              />
+                            }
+                            label="No"
+                          />
+                        </Col>
+                      </Row>
+                    </RadioGroup>
                   </Col>
                 </Row>
+
                 <Divider />
                 <Row
                   style={{ marginTop: "10%", marginBottom: "5%" }}
@@ -183,13 +238,13 @@ const DatosAuto = () => {
                     </Row>
                   </Col>
                   <Col>
-                    <Button
+                    <ButtonAntd
                       className="btn-left"
                       size="large"
                       onClick={() => plusOrMinus("minus")}
                     >
                       <MinusOutlined />
-                    </Button>
+                    </ButtonAntd>
 
                     <InputNumber
                       className="input-number"
@@ -203,59 +258,63 @@ const DatosAuto = () => {
                       value={auto.monto}
                       onChange={(value) => setAuto({ ...auto, monto: value })}
                     />
-                    <Button
+                    <ButtonAntd
                       className="btn-right"
                       size="large"
                       onClick={() => plusOrMinus("plus")}
                     >
                       <PlusOutlined />
-                    </Button>
+                    </ButtonAntd>
                   </Col>
                 </Row>
                 <Row>
                   <Col>
                     <Button
-                      className="submit"
-                      style={{ marginBottom: "10%" }}
-                      onClick={nextPage}
+                      variant="contained"
+                      color="primary"
+                      className="btn-primary"
+                      type="submit"
+                      size="large"
+                      fullWidth
+                      endIcon={<ChevronRight />}
                     >
-                      CONTINUAR <RightOutlined />
+                      Continuar
                     </Button>
                   </Col>
                 </Row>
-              </Col>
-              <Col xl={8} sm={6}>
-                <Row>
-                  <Col>
-                    <label className="label-ayuda">AYUDA</label>
-                  </Col>
-                </Row>
-                <Divider />
-                <Row>
-                  <Col xl={14} sm={14}>
-                    <Row>
-                      <Col>
-                        <label className="label-completar">
-                          ¿No encuentras el modelo?
-                        </label>
-                      </Col>
-                    </Row>
-                    <Row>
-                      <Col>
-                        <a>CLIC AQUÍ</a>
-                      </Col>
-                    </Row>
-                  </Col>
-                  <Col xl={10} sm={10}>
-                    <img src={car} alt="car" />
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          </Card>
-        </Col>
-      </Row>
-    </>
+              </form>
+            </Col>
+            <Col xl={8} sm={6}>
+              <Row>
+                <Col>
+                  <label className="label-ayuda">AYUDA</label>
+                </Col>
+              </Row>
+              <Divider />
+              <Row>
+                <Col xl={14} sm={14}>
+                  <Row>
+                    <Col>
+                      <label className="label-completar">
+                        ¿No encuentras el modelo?
+                      </label>
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col>
+                      <a>CLIC AQUÍ</a>
+                    </Col>
+                  </Row>
+                </Col>
+                <Col xl={10} sm={10}>
+                  <img src={car} alt="car" />
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Card>
+      </Col>
+    </Row>
   );
 };
 

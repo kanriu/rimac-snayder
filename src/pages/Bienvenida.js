@@ -1,11 +1,11 @@
 import React from "react";
-import { Button, Col, Row, Space } from "antd";
+import { Col, Row, Space } from "antd";
 import bienvenida from "../assets/images/bienvenida.PNG";
-import "../assets/css/Bienvenida.css";
 import { useSelector } from "react-redux";
+import Button from "@material-ui/core/Button";
 
 const Bienvenida = () => {
-  const user = useSelector((state) => state.Auth.User);
+  const user = useSelector((state) => state.auth.user);
 
   return (
     <Row align="middle" style={{ backgroundColor: "white" }}>
@@ -39,9 +39,17 @@ const Bienvenida = () => {
               <label className="final-correo">{user.email}</label>
             </Col>
           </Row>
-          <Row justify="center">
+          <Row className="mt-2">
             <Col>
-              <Button className="submit">CÓMO USAR MI SEGURO</Button>
+              <Button
+                variant="contained"
+                color="primary"
+                className="btn-primary"
+                size="large"
+                fullWidth
+              >
+                Cómo usar mi seguro
+              </Button>
             </Col>
           </Row>
         </Space>

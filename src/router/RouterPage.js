@@ -18,18 +18,18 @@ import Bienvenida from "../pages/Bienvenida";
 const { Content } = Layout;
 
 export const RouterPage = () => {
-  const AuthStatus = useSelector((state) => state.Auth.AuthStatus);
-  const FinalStatus = useSelector((state) => state.Global.FinalStatus);
+  const authStatus = useSelector((state) => state.auth.authStatus);
+  const finalStatus = useSelector((state) => state.global.finalStatus);
   return (
     <Router>
       <Switch>
         <Route exact path="/" component={Login} />
-        {AuthStatus ? (
+        {authStatus ? (
           <Layout style={{ height: "100vh" }}>
             <Header />
             <Layout>
               <Route path="/bienvenida" component={Bienvenida} />
-              {!FinalStatus && (
+              {!finalStatus && (
                 <>
                   <Sidebar />
                   <Layout>

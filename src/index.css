@@ -23,7 +23,7 @@
 }
 
 @font-face {
-  font-family: "Roboto";
-  src: local("Roboto"),
-    url(./assets/fonts/Roboto/Roboto-Regular.ttf) format("truetype");
+  font-family: "Lato";
+  src: local("Lato"),
+    url(./assets/fonts/Lato/Lato-Regular.ttf) format("truetype");
 }

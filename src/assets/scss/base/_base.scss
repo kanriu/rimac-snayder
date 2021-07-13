@@ -1,0 +1,47 @@
+.pointer {
+  cursor: pointer;
+}
+
+.mt-1 {
+  margin-top: 10px;
+}
+
+.mt-2 {
+  margin-top: 20px;
+}
+
+.mb-1 {
+  margin-bottom: 5px;
+}
+
+.mb-2 {
+  margin-bottom: 20px;
+}
+
+.ml-1 {
+  margin-left: 5px;
+}
+
+.ml-5 {
+  margin-left: 20px;
+}
+
+.block {
+  width: 100%;
+}
+
+.MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: $primary !important;
+}
+
+.MuiFormLabel-root.Mui-focused {
+  color: $primary !important;
+}
+
+.MuiButton-containedSizeLarge {
+  padding: 14px 28px !important;
+}
+
+.MuiTab-textColorInherit.Mui-selected {
+  color: $primary !important;
+}
